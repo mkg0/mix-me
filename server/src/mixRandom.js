@@ -2,7 +2,6 @@
  * Created by iyadas on 29.09.17.
  */
 
-
 // const names = ['iyad.al', 'julius.b', 'jonas.h', 'alexander', 'hermann', 'phil.g', 'newGuy', 'another.one']
 const names = ['iyad.al', 'julius.b', 'jonas.h', 'alexander', 'hermann', 'phil.g', 'newGuy', 'another.one', 'q', 'w', 'l', 'a']
 //const names = ['iyad.al', 'julius.b', 'jonas.h', 'alexander', 'hermann', 'phil.g', 'newGuy']
@@ -21,28 +20,26 @@ var groups = shuffledNames.reduce((groupedNames, name, index) => {
     }
     groupedNames[pos].push(name)
     return groupedNames
-}, {})
+}, [])
 
 console.log('after', names)
 console.log('group', groups)
 
+// if last group has less than 3 persons get 2 people from the secondlast group
 if(names.length > 5) {
-    const lastGroup = groups[Object.keys(groups).length - 1]
+    let lastGroup = groups[groups.length - 1]
     if (lastGroup.length < 3) {
         console.log(lastGroup.length + ' is small than 3')
-        const secondLastGroup = groups[Object.keys(groups).length - 2]
-        let lastFromNames = secondLastGroup[secondLastGroup.length - 1]
-        let secondLastFromNames = secondLastGroup[secondLastGroup.length - 2]
-        console.log(lastFromNames + ' is last guy')
-        console.log(secondLastFromNames + ' is secondLast guy')
-        secondLastGroup.pop(lastFromNames)
-        secondLastGroup.pop(secondLastFromNames)
-        lastGroup.push(lastFromNames)
-        lastGroup.push(secondLastFromNames)
+        let secondLastGroup = groups[groups.length - 2]
+
+        let shifted = secondLastGroup.splice(0, 2)
+        console.log('shifted', shifted)
+
+        groups[groups.length - 1] = lastGroup.concat(shifted)
     }
 }
 
-const jsonGroups = Object.keys(groups).map(key => groups[key]).map((namesForGroup) => ({ names: namesForGroup }))
+const jsonGroups = groups.map((namesForGroup) => ({ names: namesForGroup }))
 console.log('as array', jsonGroups)
 
 
@@ -70,7 +67,6 @@ function shuffle(array) {
 
     return array;
 }
-
 
 
 /*names: [
