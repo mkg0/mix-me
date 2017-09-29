@@ -10,7 +10,13 @@ import {
   RaisedButton,
   FlatButton,
   Subheader,
+  List,
+  ListItem,
+  Avatar,
 } from 'material-ui'
+
+import { Assignment, MailOutline, TagFaces } from 'material-ui-icons'
+import { indigo600, pink500 } from 'material-ui/styles/colors'
 
 function Tutorial({ step, onNext, onPrevious, onSelectStep }) {
   return (
@@ -22,13 +28,16 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep }) {
       </Subheader>
       <Stepper activeStep={step} linear={false} orientation="vertical">
         <Step>
-          <StepButton onClick={() => onSelectStep(0)}>Sign Up</StepButton>
+          <StepButton onClick={() => onSelectStep(0)}>Register</StepButton>
           <StepContent>
-            <p>
-              better you're willing to spend on clicks and conversions, which
-              networks and geographical locations you want your ads to show on,
-              and more.
-            </p>
+            <List>
+              <ListItem
+                leftAvatar={
+                  <Avatar icon={<Assignment />} backgroundColor={indigo600} />
+                }
+                primaryText="Sign Up with your Signavio E-mail address"
+              />
+            </List>
             <RaisedButton primary label="Next" onClick={onNext} />
           </StepContent>
         </Step>
@@ -38,10 +47,17 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep }) {
             Get a notification with your buddies group
           </StepButton>
           <StepContent>
+            <List>
+              <ListItem
+                leftAvatar={
+                  <Avatar icon={<MailOutline />} backgroundColor={indigo600} />
+                }
+                primaryText="Get E-mail notification"
+              />
+            </List>
             <p>
-              For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.
+              Mix and Match will form a random group of colleagues and send you
+              E-mail invitation
             </p>
             <RaisedButton primary label="Next" onClick={onNext} />
             <FlatButton label="Previous" onClick={onPrevious} />
@@ -53,11 +69,14 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep }) {
             Meet and have fun!
           </StepButton>
           <StepContent>
-            <p>
-              For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.
-            </p>
+            <List>
+              <ListItem
+                leftAvatar={
+                  <Avatar icon={<TagFaces />} backgroundColor={pink500} />
+                }
+                primaryText="Meet at selected place before Pre-lunch and enjoy!"
+              />
+            </List>
           </StepContent>
         </Step>
       </Stepper>
