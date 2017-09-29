@@ -1,5 +1,5 @@
-import React from "react";
-import "./App.css";
+import React from 'react'
+import './App.css'
 
 export default function Register() {
   return (
@@ -9,5 +9,5 @@ export default function Register() {
       <input type="text" placeholder="firstname.lastname" />
       <button>Sign me up!</button>
     </div>
-  );
+  )
 }
