@@ -2,7 +2,7 @@ import React from 'react'
 import { compose, withHandlers, withState } from 'recompose'
 import './Register.css'
 
-function Register({ onChange }) {
+function Register({ onChange, onSubmit }) {
   return (
     <div className="register-page">
       <h1 className="register-logo">🍔 Mix Me! 🍔</h1>
@@ -16,7 +16,9 @@ function Register({ onChange }) {
         />
         <span>@signavio.com</span>
       </div>
-      <button className="register-button">Sign me up!</button>
+      <button className="register-button" onClick={onSubmit}>
+        Sign me up!
+      </button>
     </div>
   )
 }
@@ -26,6 +28,9 @@ export default compose(
   withHandlers({
     onChange: ({ setUsername }) => event => {
       setUsername(event.target.value)
+    },
+    onSubmit: ({ username }) => event => {
+      console.log(username)
     },
   })
 )(Register)
