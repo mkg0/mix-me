@@ -1,15 +1,9 @@
 import React from 'react'
 import { capitalize } from 'lodash'
 
-import Subheader from 'material-ui/Subheader'
-import { List, ListItem } from 'material-ui/List'
-import Avatar from 'material-ui/Avatar'
-import AppBar from 'material-ui/AppBar'
-import Divider from 'material-ui/Divider'
-
-import { pink500 } from 'material-ui/styles/colors'
-
 import { Room } from 'material-ui-icons'
+import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
+import { pink500 } from 'material-ui/styles/colors'
 
 export default function Matches({ matches }) {
   return (
