@@ -5,13 +5,15 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack --config webpack.config.development.js",
-    "build": "rm -rf ./build && webpack --config webpack.config.production.js"
+    "start": "NODE_ENV=development webpack --config webpack.config.development.js",
+    "build": "rm -rf ./build && NODE_ENV=production webpack --config webpack.config.production.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-minify-dead-code-elimination": "^0.2.0",
+    "babel-plugin-transform-node-env-inline": "^0.2.0",
     "babel-preset-env": "^1.6.0",
     "eslint": "^4.7.2",
     "eslint-config-signavio": "^3.2.0",
@@ -21,6 +23,8 @@
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
-    "express": "^4.16.0"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.0",
+    "nconf": "^0.8.5"
   }
 }
