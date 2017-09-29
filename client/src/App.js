@@ -1,13 +1,14 @@
 import React from 'react'
-import { Route } from 'react-router'
-import { BrowserRouter } from 'react-router-dom'
+import { Route, Switch } from 'react-router'
+import { BrowserRouter, Redirect } from 'react-router-dom'
 
 import Register from './Register'
 import Matches from './Matches'
 import Tutorial from './Tutorial'
+import NotFound from './NotFound'
 
 const jonas = { name: 'jonas.hartweg' }
-const oleks = { name: 'oleks.g' }
+const oleks = { name: 'oleks.hrishchuk' }
 const phil = { name: 'philipp.giese' }
 
 const matches = {
@@ -18,11 +19,13 @@ const matches = {
 export default function MixMe() {
   return (
     <BrowserRouter>
-      <div>
+      <Switch>
+        <Redirect exact path="/" to="/register" />
         <Route path="/register" component={Register} />
         <Route path="/matches" render={() => <Matches matches={matches} />} />
         <Route path="/tutorial" component={Tutorial} />
-      </div>
+        <Route component={NotFound} />
+      </Switch>
     </BrowserRouter>
   )
 }
