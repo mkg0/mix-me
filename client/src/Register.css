@@ -34,9 +34,30 @@
 
 .register-signup {
   display: block;
-  margin: 0 auto 20px auto;
+  margin: 0 auto;
 }
 
 .register-signavio {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.register-button {
+  margin-top: 20px;
+}
+
+.register-tutorial {
+  position: fixed;
+  left: 0;
+  bottom: 70px;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 120px;
+  width: 100%;
+  text-align: center;
+}
+
+.register-tutorial-link {
+  text-decoration: underline;
   color: rgba(0, 0, 0, 0.3);
 }
