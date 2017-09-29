@@ -1,24 +1,23 @@
 import React from 'react'
 import { compose, withHandlers, withState } from 'recompose'
 import './Register.css'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 function Register({ onChange, onSubmit }) {
   return (
     <div className="register-page">
-      <h1 className="register-logo">🍔 Mix Me! 🍔</h1>
-      <p className="register-description">Find buddies to have lunch with.</p>
-      <div className="register-signup">
-        <input
-          onChange={onChange}
-          className="register-input"
-          type="text"
-          placeholder="firstname.lastname"
-        />
-        <span>@signavio.com</span>
+      <h1 className="register-logo">🍔 MixMe</h1>
+      <div className="register-card">
+        <p className="register-description">Find buddies to have lunch with.</p>
+        <div className="register-signup">
+          <TextField style={{ width: 200 }} onChange={onChange} />
+          <span className="register-signavio">@signavio.com</span>
+        </div>
+        <div>
+          <RaisedButton label="Sign up!" secondary onClick={onSubmit} />
+        </div>
       </div>
-      <button className="register-button" onClick={onSubmit}>
-        Sign me up!
-      </button>
     </div>
   )
 }

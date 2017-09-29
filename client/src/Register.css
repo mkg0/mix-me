@@ -2,14 +2,35 @@
   text-align: center;
 }
 
+.register-card {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 6px;
+  padding-top: 20px;
+}
+
+.register-logo {
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  font-size: 50px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  background: #ad0f5b;
+  padding: 80px 0;
+  color: white;
+}
+
+.register-description {
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
 .register-signup {
   display: block;
   margin: 0 auto 20px auto;
 }
 
-.register-input {
-  border: 1px solid black;
-  margin-right: 2px;
+.register-signavio {
+  color: #aaa;
 }
 
 .register-button {
