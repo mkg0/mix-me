@@ -29,6 +29,7 @@ export default function Matches({ matches }) {
         <Subheader inset>We will meet at...</Subheader>
 
         <ListItem
+          disabled
           leftAvatar={<Avatar icon={<Room />} backgroundColor={pink500} />}
           primaryText={matches.location}
         />
