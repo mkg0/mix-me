@@ -9,6 +9,6 @@ app.get('/api', (req, res) => {
     })
 })
 
-app.get(express.static(join(__dirname, 'public')))
+app.get('*', express.static(join(__dirname, 'public')))
 
 export default app
