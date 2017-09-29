@@ -3,7 +3,10 @@ import app from './server'
 
 const server = http.createServer(app)
 let currentApp = app
-server.listen(3000)
+server.listen(3000, err => {
+    if (err) console.log(err)
+    console.log('Started server')
+})
 if (module.hot) {
     module.hot.accept('./server', () => {
         server.removeListener('request', currentApp)
