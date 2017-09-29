@@ -5,24 +5,15 @@ import { compose, withHandlers, withState } from 'recompose'
 import './Register.css'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import Help from 'material-ui/svg-icons/action/help'
-
-const styles = {
-  mediumIcon: {
-    width: 48,
-    height: 48,
-  },
-  medium: {
-    width: 96,
-    height: 96,
-    padding: 24,
-  },
-}
 
 function Register({ onChange, onSubmit, registered }) {
   return (
     <div className="register-page">
-      <h1 className="register-logo">🍔 MixMe</h1>
+      <h1 className="register-logo">
+        <span role="img" aria-labelledby="hamburger">
+          🍔
+        </span>MixMe
+      </h1>
       <div className="register-card">
         <p className="register-description">
           Find buddies to have lunch with today
