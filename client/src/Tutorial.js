@@ -1,5 +1,6 @@
 import React from 'react'
 import { withState, withHandlers, compose } from 'recompose'
+import { withRouter } from 'react-router'
 
 import {
   AppBar,
@@ -18,7 +19,7 @@ import {
 import { Assignment, MailOutline, TagFaces } from 'material-ui-icons'
 import { indigo600, pink500 } from 'material-ui/styles/colors'
 
-function Tutorial({ step, onNext, onPrevious, onSelectStep }) {
+function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
   return (
     <div>
       <AppBar showMenuIconButton={false} title="Tutorial" />
@@ -74,12 +75,15 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep }) {
                 leftAvatar={
                   <Avatar icon={<TagFaces />} backgroundColor={pink500} />
                 }
-                primaryText="Meet at selected place before Pre-lunch and enjoy!"
+                primaryText="Meet at selected place after Pre-lunch and enjoy!"
               />
             </List>
           </StepContent>
         </Step>
       </Stepper>
+      <div style={{ marginTop: 20, marginLeft: 20 }}>
+        <RaisedButton label="Go back" onClick={() => history.goBack()} />
+      </div>
     </div>
   )
 }
@@ -90,5 +94,6 @@ export default compose(
     onNext: ({ step, setStep }) => () => setStep(step + 1),
     onPrevious: ({ step, setStep }) => () => setStep(step - 1),
     onSelectStep: ({ setStep }) => index => setStep(index),
-  })
+  }),
+  withRouter
 )(Tutorial)
