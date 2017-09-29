@@ -1,3 +1,4 @@
 {
-    "presets": [["env", { "modules": false }]]
+    "presets": [["env", { "modules": false }]],
+    "plugins": ["transform-node-env-inline", "minify-dead-code-elimination"]
 }
