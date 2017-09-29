@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router'
 import { BrowserRouter, Redirect } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 import Register from './Register'
 import Matches from './Matches'
@@ -17,9 +18,16 @@ const matches = {
   location: 'The Signavio Lounge',
 }
 
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: '#ad0f5b',
+    accent1Color: 'rgb(24, 170, 177)',
+  },
+})
+
 export default function MixMe() {
   return (
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={muiTheme}>
       <BrowserRouter>
         <Switch>
           <Redirect exact path="/" to="/register" />
