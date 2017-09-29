@@ -3,10 +3,12 @@
  */
 
 
-const names = ['iyad.al', 'julius.b', 'jonas.h', 'alexander', 'hermann', 'phil.g', 'newGuy', 'another.one']
+// const names = ['iyad.al', 'julius.b', 'jonas.h', 'alexander', 'hermann', 'phil.g', 'newGuy', 'another.one']
+const names = ['iyad.al', 'julius.b', 'jonas.h', 'alexander', 'hermann', 'phil.g', 'newGuy', 'another.one', 'q', 'w', 'l', 'a']
 //const names = ['iyad.al', 'julius.b', 'jonas.h', 'alexander', 'hermann', 'phil.g', 'newGuy']
 console.log('name length ', names.length)
 
+const locations = ['Lounge', 'Amphi', 'Main Kitchen', 'Backyard']
 
 console.log('before', names)
 
@@ -40,9 +42,15 @@ if(names.length > 5) {
     }
 }
 
-console.log('as array', Object.keys(groups).map(key => groups[key]).map((namesForGroup) => ({ names: namesForGroup })))
+const jsonGroups = Object.keys(groups).map(key => groups[key]).map((namesForGroup) => ({ names: namesForGroup }))
+console.log('as array', jsonGroups)
 
 
+const finalJson = jsonGroups.map((group, index) => {
+    return Object.assign({},group, {location: locations[index%locations.length]})
+})
+
+console.log('finalJson', finalJson)
 // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
