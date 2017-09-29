@@ -1,14 +1,17 @@
-.App {
+.register-page {
   text-align: center;
 }
 
-.App input {
-  width: 40%;
+.register-signup {
   display: block;
   margin: 0 auto 20px auto;
-  border: 1px solid black;
 }
 
-.App button {
+.register-input {
+  border: 1px solid black;
+  margin-right: 2px;
+}
+
+.register-button {
   border: 1px solid black;
 }
