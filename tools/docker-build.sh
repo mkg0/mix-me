@@ -1,9 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e # Abort script at first error
 # set -u # Disallow unset variables
-
-docker --version
 
 IMAGE_VERSION=${TRAVIS_BUILD_NUMBER:-dev}
 
