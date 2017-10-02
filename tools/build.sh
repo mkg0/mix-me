@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cwd=`pwd`
-function build() {
+build () {
   cd $cwd/$1 && yarn --mutex file:/tmp/.yarn-mutex && yarn build
 }
 
