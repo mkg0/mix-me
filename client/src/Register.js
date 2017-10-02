@@ -5,6 +5,7 @@ import { compose, withHandlers, withState } from 'recompose'
 import './Register.css'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import registerUser from './api/service'
 
 function Register({ onChange, onSubmit, registered }) {
   return (
@@ -53,15 +54,19 @@ function Register({ onChange, onSubmit, registered }) {
 }
 
 export default compose(
+  withState('error', 'setError', null),
   withState('registered', 'setRegistered', false),
   withState('username', 'setUsername', null),
   withHandlers({
     onChange: ({ setUsername }) => event => {
       setUsername(event.target.value)
     },
-    onSubmit: ({ username, setRegistered }) => event => {
-      setRegistered(true)
-      console.log(username)
+    onSubmit: ({ username, setRegistered, setError }) => () => {
+      try {
+        registerUser(username).then(() => setRegistered(true))
+      } catch (error) {
+        setError(error)
+      }
     },
   })
 )(Register)
