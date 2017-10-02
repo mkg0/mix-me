@@ -1,5 +1,6 @@
 import http from 'http'
 import nconf from 'nconf'
+import config from './config'
 
 import app from './server'
 
@@ -16,11 +17,11 @@ nconf
             type: 'number',
         },
     })
-    .defaults({ HOST: 'localhost' })
-    .required(['PORT'])
+    .defaults(config)
+    .required(['PORT', 'DB_HOST', 'DB_USER', 'DB_PASS'])
 
-const server = http.createServer(app)
-let currentApp = app
+let currentApp = app()
+const server = http.createServer(currentApp)
 server.listen(nconf.get('PORT'), nconf.get('HOST'), err => {
     if (err) {
         // eslint-disable-next-line no-console
@@ -36,8 +37,9 @@ server.listen(nconf.get('PORT'), nconf.get('HOST'), err => {
 
 if (module.hot) {
     module.hot.accept('./server', () => {
+        const newApp = app()
         server.removeListener('request', currentApp)
-        server.on('request', app)
-        currentApp = app
+        server.on('request', newApp)
+        currentApp = newApp
     })
 }
