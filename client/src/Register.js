@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import registerUser from './api/service'
 
-function Register({ onChange, onSubmit, registered }) {
+function Register({ onChange, onSubmit, registered, username }) {
   return (
     <div className="register-page">
       <h1 className="register-logo">
@@ -31,10 +31,11 @@ function Register({ onChange, onSubmit, registered }) {
               id="register-input"
               className="register-input"
               onChange={onChange}
-              hintText="Your mail"
+              hintText="firstname.lastname"
             />
             <span className="register-signavio">@signavio.com</span>
             <RaisedButton
+              disabled={!username.match(/^[a-z]+\.[a-z]+$/)}
               label="Match me!"
               className="register-button"
               primary
@@ -56,7 +57,7 @@ function Register({ onChange, onSubmit, registered }) {
 export default compose(
   withState('error', 'setError', null),
   withState('registered', 'setRegistered', false),
-  withState('username', 'setUsername', null),
+  withState('username', 'setUsername', ''),
   withHandlers({
     onChange: ({ setUsername }) => event => {
       setUsername(event.target.value)
