@@ -6,6 +6,7 @@ import './Register.css'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import Help from 'material-ui/svg-icons/action/help'
+import registerUser from './api/service'
 
 const styles = {
   mediumIcon: {
@@ -19,7 +20,7 @@ const styles = {
   },
 }
 
-function Register({ onChange, onSubmit, toggleTutorial, tutorial }) {
+function Register({ onChange, onSubmit }) {
   return (
     <div className="register-page">
       <h1 className="register-logo">🍔 MixMe</h1>
@@ -63,17 +64,19 @@ function Register({ onChange, onSubmit, toggleTutorial, tutorial }) {
 }
 
 export default compose(
-  withState('tutorial', 'setTutorial', false),
+  withState('error', 'setError', null),
+  withState('registered', 'setRegistered', false),
   withState('username', 'setUsername', null),
   withHandlers({
     onChange: ({ setUsername }) => event => {
       setUsername(event.target.value)
     },
-    onSubmit: ({ username }) => event => {
-      console.log(username)
-    },
-    toggleTutorial: ({ setTutorial, tutorial }) => () => {
-      setTutorial(!tutorial)
+    onSubmit: ({ username, setRegistered, setError }) => () => {
+      try {
+        registerUser(username).then(() => setRegistered(true))
+      } catch (error) {
+        setError(error)
+      }
     },
   })
 )(Register)
