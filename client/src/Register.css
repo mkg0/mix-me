@@ -1,63 +1,52 @@
-.register-page {
+body {
+  background-color: #212125;
+}
+
+img {
+  width: 100%;
+  margin-bottom: 15%;
+}
+
+.signavio-color {
+  color: #ad0f5b !important;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flex {
+  padding: 1rem;
+  margin: 0.5rem;
+  flex: 1;
+  flex-basis: 100%;
+}
+
+.flex2 {
+  flex: 1;
+  flex-basis: 100%;
+}
+
+.register-wrapper {
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  color: #fff;
+}
+
+input {
   text-align: center;
 }
 
-.register-card {
-  width: 100%;
-  margin: 0 auto;
-  border-radius: 6px;
-}
-
-.register-logo {
-  font-family: 'Trebuchet MS', Helvetica, sans-serif;
-  font-size: 50px;
-  margin-bottom: 60px;
-  margin-top: 0px;
-  background: linear-gradient(
-    to bottom right,
-    #3f0446,
-    #d20075,
-    rgb(24, 177, 175)
-  );
-  padding: 80px 0;
-  color: white;
-}
-
-.register-description {
-  margin-bottom: 20px;
-  font-weight: 300;
-}
-
-.register-input {
-  width: 45% !important;
-}
-
-.register-signup {
-  display: block;
-  margin: 0 auto;
-}
-
-.register-signavio {
-  color: rgba(0, 0, 0, 0.3);
-}
-
-.register-button {
-  margin-top: 20px;
-}
-
-.register-tutorial {
-  position: fixed;
+.footer {
+  position: absolute;
+  bottom: 20px;
   left: 0;
-  bottom: 70px;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 16px;
-  font-weight: 300;
-  margin-top: 120px;
-  width: 100%;
-  text-align: center;
+  right: 0;
 }
 
-.register-tutorial-link {
+.tutorial-link {
   text-decoration: underline;
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.6);
 }

@@ -6,46 +6,63 @@ import './Register.css'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import registerUser from './api/service'
+import logo from './logo.jpg'
+
+const hintStyle = {
+  color: '#fff',
+  margin: '0 24%',
+}
+
+const inputStyle = {
+  color: '#ad0f5b',
+}
 
 function Register({ onChange, onSubmit, registered, username }) {
   return (
-    <div className="register-page">
-      <h1 className="register-logo">
-        <span role="img" aria-labelledby="hamburger">
-          🍔
-        </span>MixMe
-      </h1>
-      <div className="register-card">
-        <p className="register-description">
-          Find buddies to have lunch with today
-        </p>
-        {registered ? (
-          <div>
-            {' '}
-            <p>You are signed up!</p>
-            <p>We'll find a match for as quick as possible!</p>
+    <div className="register-wrapper">
+      <div className="row">
+        <div className="flex2">
+          <img src={logo} alt="Mix-Me logo" />
+        </div>
+      </div>
+      {registered ? (
+        <div className="row">
+          <div className="flex">
+            <h3 className="signavio-color">You are signed up!</h3>
+            <p>We'll find a match for you as quick as possible!</p>
           </div>
-        ) : (
-          <div className="register-signup">
-            <TextField
-              id="register-input"
-              className="register-input"
-              onChange={onChange}
-              hintText="firstname.lastname"
-            />
-            <span className="register-signavio">@signavio.com</span>
-            <RaisedButton
-              disabled={!username.match(/^[a-z]+\.[a-z]+$/)}
-              label="Match me!"
-              className="register-button"
-              primary
-              onClick={onSubmit}
-            />
+        </div>
+      ) : (
+        <div>
+          <div className="row">
+            <div className="flex">
+              <TextField
+                hintStyle={hintStyle}
+                id="register-input"
+                className="register-input"
+                onChange={onChange}
+                inputStyle={inputStyle}
+                hintText="firstname.lastname"
+              />
+              <span className="signavio-color">@signavio.com</span>
+            </div>
           </div>
-        )}
-        <div className="register-tutorial">
+          <div className="row">
+            <div className="flex">
+              <RaisedButton
+                disabled={!username.match(/^[a-z]+\.[a-z]+$/)}
+                label="Mix Me!"
+                primary
+                onClick={onSubmit}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="row">
+        <div className="flex footer">
           <span>New here? </span>
-          <Link to="/tutorial" className="register-tutorial-link">
+          <Link to="/tutorial" className="tutorial-link">
             Take the tutorial
           </Link>
         </div>
