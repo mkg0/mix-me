@@ -95,7 +95,7 @@ function Register({ onChange, onSubmit, registered, username }) {
 
 export default compose(
   withState('error', 'setError', null),
-  withState('registered', 'setRegistered', false),
+  withState('registered', 'setRegistered', !!Cookies.get('name')),
   withState('username', 'setUsername', ''),
   withHandlers({
     onChange: ({ setUsername }) => event => {

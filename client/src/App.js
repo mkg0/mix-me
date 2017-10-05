@@ -8,7 +8,6 @@ import Cookies from 'js-cookie'
 import Register from './Register'
 import Match from './Match'
 import Tutorial from './Tutorial'
-import NotFound from './NotFound'
 
 const muiTheme = getMuiTheme({
   palette: {
