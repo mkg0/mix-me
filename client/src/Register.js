@@ -18,6 +18,8 @@ const inputStyle = {
   color: 'white',
 }
 
+const preferences = [{ type: '🍱' }, { type: '🍕' }, { type: '🍖' }]
+
 function Register({ onChange, onSubmit, registered, username }) {
   return (
     <div className="register-wrapper">
@@ -41,6 +43,7 @@ function Register({ onChange, onSubmit, registered, username }) {
                 hintStyle={hintStyle}
                 id="register-input"
                 className="register-input"
+                value={username}
                 onChange={onChange}
                 inputStyle={inputStyle}
                 hintText="firstname.lastname"
@@ -50,8 +53,17 @@ function Register({ onChange, onSubmit, registered, username }) {
           </div>
           <div className="row">
             <div className="flex">
+              <select className="food-preferences">
+                <option>🍱</option>
+                <option>🍕</option>
+                <option>🍖</option>
+              </select>
+            </div>
+          </div>
+          <div className="row">
+            <div className="flex">
               <RaisedButton
-                disabled={!username.match(/^[a-z]+\.[a-z]+$/)}
+                disabled={!username.toLowerCase().match(/^[a-z]+\.[a-z]+$/)}
                 label="Mix Me!"
                 primary
                 onClick={onSubmit}
@@ -76,7 +88,7 @@ export default compose(
   withState('username', 'setUsername', ''),
   withHandlers({
     onChange: ({ setUsername }) => event => {
-      setUsername(event.target.value)
+      setUsername(event.target.value.toLowerCase())
     },
     onSubmit: ({ username, setRegistered, setError }) => () => {
       try {

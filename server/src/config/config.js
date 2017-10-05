@@ -1,3 +1,3 @@
 module.exports = {
-    HOST: 'localhost',
+  DB_HOST: 'localhost',
 }
