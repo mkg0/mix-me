@@ -10,12 +10,12 @@ import registerUser from './api/service'
 import logo from './logo.jpg'
 
 const hintStyle = {
-  color: '#fff',
+  color: 'rgba(255, 255, 255, 0.6)',
   margin: '0 24%',
 }
 
 const inputStyle = {
-  color: '#ad0f5b',
+  color: 'white',
 }
 
 function Register({ onChange, onSubmit, registered, username }) {
