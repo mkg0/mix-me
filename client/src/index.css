@@ -2,6 +2,9 @@ body {
   background-color: #212125;
   color: #fff;
   font-family: Roboto, sans-serif;
+
+  max-width: 540px;
+  margin: 0 auto;
 }
 
 .signavio-color {

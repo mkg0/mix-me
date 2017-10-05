@@ -1,3 +1,7 @@
+fetch('/api/matchme').then(response => {
+  console.log(response)
+})
+
 this.addEventListener('activate', function(event) {
   const title = "It's a match!"
   const options = {

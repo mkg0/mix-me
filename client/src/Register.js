@@ -60,11 +60,9 @@ function Register({ onChange, onSubmit, registered, username }) {
         </div>
       )}
       <div className="row">
-        <div className="flex">
+        <div className="flex tutorial-link">
           <span>New here? </span>
-          <Link to="/tutorial" className="tutorial-link">
-            Take the tutorial
-          </Link>
+          <Link to="/tutorial">Take the tutorial</Link>
         </div>
       </div>
     </div>

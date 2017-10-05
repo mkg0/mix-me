@@ -12,6 +12,10 @@ input {
 }
 
 .tutorial-link {
+  font-weight: 300;
+}
+
+.tutorial-link a {
   text-decoration: underline;
   color: rgba(255, 255, 255, 0.6);
 }

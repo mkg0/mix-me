@@ -45,7 +45,7 @@ const fullName = name => {
 }
 
 const initials = name => {
-  const [firstName, lastName] = name.split('.')
+  const [lastName] = name.split('.')
 
   return lastName.slice(0, 1).toUpperCase()
 }
