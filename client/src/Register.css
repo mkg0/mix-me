@@ -1,6 +1,6 @@
 img {
   width: 100%;
-  margin-bottom: 15%;
+  margin-bottom: 20px;
 }
 
 .register-wrapper {
@@ -10,13 +10,20 @@ img {
 
 input {
   text-align: center;
+  width: 80%;
 }
 
 .tutorial-link {
   font-weight: 300;
+  margin-top: 50px;
 }
 
 .tutorial-link a {
   text-decoration: underline;
   color: rgba(255, 255, 255, 0.6);
+}
+
+.food-preferences {
+  font-size: 52px;
+  outline-width: 0;
 }

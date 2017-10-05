@@ -18,6 +18,8 @@ const inputStyle = {
   color: '#ad0f5b',
 }
 
+const preferences = [{ type: '🍱' }, { type: '🍕' }, { type: '🍖' }]
+
 function Register({ onChange, onSubmit, registered, username }) {
   return (
     <div className="register-wrapper">
@@ -47,6 +49,15 @@ function Register({ onChange, onSubmit, registered, username }) {
                 hintText="firstname.lastname"
               />
               <span className="signavio-color">@signavio.com</span>
+            </div>
+          </div>
+          <div className="row">
+            <div className="flex">
+              <select className="food-preferences">
+                <option>🍱</option>
+                <option>🍕</option>
+                <option>🍖</option>
+              </select>
             </div>
           </div>
           <div className="row">
