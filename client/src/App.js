@@ -17,33 +17,20 @@ const muiTheme = getMuiTheme({
   },
 })
 
-export default function MixMe({ match }) {
+export default function MixMe({ group }) {
   return (
     <MuiThemeProvider muiTheme={muiTheme}>
       <BrowserRouter>
         <Switch>
           <Route path="/tutorial" component={Tutorial} />
           <Route path="/register" component={Register} />
-          <Route
-            path="/match"
-            render={() =>
-              Cookies.get('name') && match.location ? (
-                <Match match={match} />
-              ) : (
-                <Redirect to="/register" />
-              )}
-          />
-          <Route
-            path="/"
-            render={() => {
-              if (Cookies.get('name') || match.location) {
-                return <Redirect to="/match" />
-              } else {
-                return <Redirect to="/register" />
-              }
-            }}
-          />
-          <Route component={NotFound} />
+          <Route path="/match" component={Match} />
+
+          {Cookies.get('name') ? (
+            <Redirect to="/match" />
+          ) : (
+            <Redirect to="/register" />
+          )}
         </Switch>
       </BrowserRouter>
     </MuiThemeProvider>

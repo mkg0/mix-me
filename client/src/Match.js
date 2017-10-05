@@ -1,39 +1,48 @@
 import React from 'react'
 import { capitalize } from 'lodash'
+import Cookies from 'js-cookie'
+import { Redirect } from 'react-router-dom'
+import { compose, branch, withState, lifecycle } from 'recompose'
 
 import { Room } from 'material-ui-icons'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
 import { pink500 } from 'material-ui/styles/colors'
 
-export default function Match({ match }) {
+function Match({ group, loading }) {
   return (
     <div>
       <AppBar showMenuIconButton={false} title="There is a match!" />
 
       <Subheader>Your group for today</Subheader>
 
-      <List>
-        {match.names.map(({ name }) => (
-          <ListItem
-            disabled
-            key={name}
-            leftAvatar={<Avatar>{initials(name)}</Avatar>}
-            primaryText={fullName(name)}
-          />
-        ))}
-      </List>
+      {loading && <div>Looking for your peers...</div>}
 
-      <Divider />
+      {group && (
+        <div>
+          <List>
+            {group.names.map(({ name }) => (
+              <ListItem
+                disabled
+                key={name}
+                leftAvatar={<Avatar>{initials(name)}</Avatar>}
+                primaryText={fullName(name)}
+              />
+            ))}
+          </List>
 
-      <List>
-        <Subheader inset>We will meet at...</Subheader>
+          <Divider />
 
-        <ListItem
-          disabled
-          leftAvatar={<Avatar icon={<Room />} backgroundColor={pink500} />}
-          primaryText={match.location}
-        />
-      </List>
+          <List>
+            <Subheader inset>We will meet at...</Subheader>
+
+            <ListItem
+              disabled
+              leftAvatar={<Avatar icon={<Room />} backgroundColor={pink500} />}
+              primaryText={group.location}
+            />
+          </List>
+        </div>
+      )}
     </div>
   )
 }
@@ -49,3 +58,21 @@ const initials = name => {
 
   return lastName.slice(0, 1).toUpperCase()
 }
+
+export default compose(
+  branch(() => !Cookies.get('name'), () => () => <Redirect to="/register" />),
+  withState('loading', 'toggleLoading', true),
+  withState('group', 'setGroup', null),
+  lifecycle({
+    componentWillMount() {
+      const { toggleLoading, setGroup } = this.props
+
+      fetch(`/api/match?name=${Cookies.get('name')}`)
+        .then(response => response.json())
+        .then(group => {
+          setGroup(group)
+          toggleLoading(false)
+        })
+    },
+  })
+)(Match)
