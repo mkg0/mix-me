@@ -6,6 +6,7 @@
     "react-scripts": "1.0.14"
   },
   "dependencies": {
+    "js-cookie": "^2.1.4",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.2",
     "material-ui-icons": "^1.0.0-beta.10",
