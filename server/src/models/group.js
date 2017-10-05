@@ -3,7 +3,16 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const GroupSchema = new Schema({
-  location: { type: String }
+    names: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'person',
+        },
+    ],
+    location: {
+        type: Schema.Types.ObjectId,
+        ref: 'location',
+    },
 })
 
-mongoose.model('group', GroupSchema)
+export default mongoose.model('group', GroupSchema)

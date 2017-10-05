@@ -1,4 +1,8 @@
 {
     "presets": [["env", { "modules": false }]],
-    "plugins": ["transform-node-env-inline", "minify-dead-code-elimination"]
+    "plugins": [
+        "transform-node-env-inline",
+        "minify-dead-code-elimination",
+        "transform-object-rest-spread"
+    ]
 }

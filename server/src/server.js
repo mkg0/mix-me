@@ -4,6 +4,10 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import nconf from 'nconf'
 
+import { Person, Location, Group } from './models'
+
+import mixRandom from './mixRandom'
+
 export default () => {
     const app = express()
 
@@ -25,18 +29,102 @@ export default () => {
         )
     /* eslint-enable no-console */
 
-    const people = []
+    app.post('/api/addlocation', bodyParser.json(), (req, res) => {
+        const location = new Location(req.body)
+        location
+            .save()
+            .then(l => {
+                res.json(l)
+            })
+            .catch(reason => {
+                res.status(400).send(reason)
+            })
+    })
 
     app.get('/api/didimatch', (req, res) => {
-        res.send({
-            names: people.map(({ name }) => name),
+        res.json({
+            names: [],
             location: 'Lounge',
         })
     })
 
+    app.get('/api/makegroups', (req, res) => {
+        Person.find()
+            .exec()
+            .then(people =>
+                Location.find()
+                    .exec()
+                    .then(locations =>
+                        Promise.all(
+                            mixRandom(people, locations).map(group =>
+                                new Group(group).save()
+                            )
+                        ).then(() => {
+                            res.status(204).send()
+                        })
+                    )
+            )
+            .catch(reason => {
+                console.log(reason)
+                res.status(400).send(reason)
+            })
+    })
+
+    app.get('/api/match', (req, res) => {
+        const { name } = req.query
+        Group.find()
+            .populate({
+                path: 'names',
+                select: 'name',
+            })
+            .populate('location', 'name')
+            .exec()
+            .then(groups => {
+                res.json(
+                    groups
+                        .map(({ location, names }) => ({
+                            location: location.name,
+                            names: names.map(({ name: n }) => n),
+                        }))
+                        .find(({ names }) => names.includes(name)) || {}
+                )
+            })
+            .catch(reason => {
+                console.log(reason)
+                res.status(400).send(reason)
+            })
+    })
+
+    app.get('/api/groups', (req, res) => {
+        Group.find()
+            .populate('names', 'name')
+            .populate('location', 'name')
+            .exec()
+            .then(groups => {
+                res.json(
+                    groups.map(({ location, names }) => ({
+                        location: location.name,
+                        names: names.map(({ name: n }) => n),
+                    }))
+                )
+            })
+            .catch(reason => {
+                console.log(reason)
+                res.status(400).send(reason)
+            })
+    })
+
     app.post('/api/matchme', bodyParser.json(), (req, res) => {
-        people.push(req.body)
-        res.status(204).send()
+        const person = new Person(req.body)
+        person
+            .save()
+            .then(() => {
+                res.status(204).send()
+            })
+            .catch(err => {
+                console.log('err', err)
+                res.status(204).send()
+            })
     })
 
     // Serve static files from the React app
