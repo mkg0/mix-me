@@ -1,49 +1,14 @@
-body {
-  background-color: #212125;
-}
-
 img {
   width: 100%;
   margin-bottom: 15%;
 }
 
-.signavio-color {
-  color: #ad0f5b !important;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.flex {
-  padding: 1rem;
-  margin: 0.5rem;
-  flex: 1;
-  flex-basis: 100%;
-}
-
-.flex2 {
-  flex: 1;
-  flex-basis: 100%;
-}
-
 .register-wrapper {
   text-align: center;
-  font-family: Roboto, sans-serif;
-  color: #fff;
 }
 
 input {
   text-align: center;
-}
-
-.footer {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
 }
 
 .tutorial-link {

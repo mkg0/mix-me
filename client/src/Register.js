@@ -60,7 +60,7 @@ function Register({ onChange, onSubmit, registered, username }) {
         </div>
       )}
       <div className="row">
-        <div className="flex footer">
+        <div className="flex">
           <span>New here? </span>
           <Link to="/tutorial" className="tutorial-link">
             Take the tutorial
