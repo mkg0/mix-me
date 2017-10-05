@@ -19,15 +19,24 @@ import {
 import { Assignment, MailOutline, TagFaces } from 'material-ui-icons'
 import { indigo600, pink500 } from 'material-ui/styles/colors'
 
+const whiteText = {
+  color: '#fff',
+}
+
 function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
   return (
     <div>
       <AppBar showMenuIconButton={false} title="Tutorial" />
 
-      <Subheader>
+      <Subheader style={whiteText}>
         Mix and Match - a way to get to know your colleagues
       </Subheader>
-      <Stepper activeStep={step} linear={false} orientation="vertical">
+      <Stepper
+        activeStep={step}
+        linear={false}
+        orientation="vertical"
+        style={stepperStyle}
+      >
         <Step>
           <StepButton onClick={() => onSelectStep(0)}>Register</StepButton>
           <StepContent>
@@ -36,6 +45,7 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
                 leftAvatar={
                   <Avatar icon={<Assignment />} backgroundColor={indigo600} />
                 }
+                style={whiteText}
                 primaryText="Sign Up with your Signavio E-mail address"
               />
             </List>
@@ -53,6 +63,7 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
                 leftAvatar={
                   <Avatar icon={<MailOutline />} backgroundColor={indigo600} />
                 }
+                style={whiteText}
                 primaryText="Get E-mail notification"
               />
             </List>
@@ -61,7 +72,11 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
               E-mail invitation
             </p>
             <RaisedButton primary label="Next" onClick={onNext} />
-            <FlatButton label="Previous" onClick={onPrevious} />
+            <FlatButton
+              label="Previous"
+              onClick={onPrevious}
+              style={whiteText}
+            />
           </StepContent>
         </Step>
 
@@ -75,6 +90,7 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
                 leftAvatar={
                   <Avatar icon={<TagFaces />} backgroundColor={pink500} />
                 }
+                style={whiteText}
                 primaryText="Meet at selected place after Pre-lunch and enjoy!"
               />
             </List>

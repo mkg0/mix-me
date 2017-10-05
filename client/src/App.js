@@ -23,6 +23,11 @@ const muiTheme = getMuiTheme({
     primary1Color: '#ad0f5b',
     accent1Color: 'rgb(24, 170, 177)',
   },
+  stepper: {
+    textColor: 'white',
+    disabledTextColor: 'white',
+    connectorLineColor: 'grey400',
+  },
 })
 
 export default function MixMe() {
