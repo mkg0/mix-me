@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import { compose, withHandlers, withState } from 'recompose'
 import './Register.css'
@@ -79,7 +80,10 @@ export default compose(
     },
     onSubmit: ({ username, setRegistered, setError }) => () => {
       try {
-        registerUser(username).then(() => setRegistered(true))
+        registerUser(username).then(() => {
+          setRegistered(true)
+          Cookies.set('name', username)
+        })
       } catch (error) {
         setError(error)
       }
