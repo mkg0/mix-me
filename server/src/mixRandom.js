@@ -10,6 +10,7 @@ export default (names, locations) => {
     const groups = shuffledNames.reduce((groupedNames, name, index) => {
         const pos = Math.floor(index / 5)
         if (!groupedNames[pos]) {
+            // eslint-disable-next-line no-param-reassign
             groupedNames[pos] = []
         }
         groupedNames[pos].push(name)

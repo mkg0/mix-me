@@ -5,6 +5,7 @@
   "devDependencies": {
     "react-scripts": "1.0.14"
   },
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "js-cookie": "^2.1.4",
     "lodash": "^4.17.4",
