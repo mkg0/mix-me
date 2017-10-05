@@ -18,7 +18,16 @@ const inputStyle = {
   color: 'white',
 }
 
-const preferences = [{ type: '🍱' }, { type: '🍕' }, { type: '🍖' }]
+const preferences = [
+  { title: '🤷', value: 'indifferent' },
+  { title: '🍕', value: 'pizza' },
+  { title: '🍔', value: 'burgers' },
+  { title: '🌯', value: 'burritos' },
+  { title: '🥕', value: 'vegetarian' },
+  { title: '🍱', value: 'sushi' },
+  { title: '🍛', value: 'thai' },
+  { title: '🍺', value: 'beers' },
+]
 
 function Register({ onChange, onSubmit, registered, username }) {
   return (
@@ -54,9 +63,11 @@ function Register({ onChange, onSubmit, registered, username }) {
           <div className="row">
             <div className="flex">
               <select className="food-preferences">
-                <option>🍱</option>
-                <option>🍕</option>
-                <option>🍖</option>
+                {preferences.map(({ value, title }) => (
+                  <option key={value} value={value}>
+                    {title}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

@@ -24,6 +24,11 @@ input {
 }
 
 .food-preferences {
+  display: none;
   font-size: 52px;
   outline-width: 0;
+  background: none;
+  border: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
