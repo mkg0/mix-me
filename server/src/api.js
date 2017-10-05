@@ -17,7 +17,7 @@ export default Router()
                 res.status(400).send(err)
             })
     })
-    .post('/matchme', bodyParser.json({ type: '*/*' }), (req, res) => {
+    .post('/matchme', bodyParser.json(), (req, res) => {
         new Person(req.body)
             .save()
             .then(({ name }) => {

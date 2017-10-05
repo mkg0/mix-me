@@ -1,8 +1,9 @@
 import { Person, Location, Group } from '../models'
 import mixRandom from '../mixRandom'
 
-export const createGroups = () =>
-    Group.deleteMany().then(() =>
+export const createGroups = () => {
+    console.log('createGroups')
+    return Group.deleteMany().then(() =>
         Person.find()
             .exec()
             .then(people =>
@@ -17,6 +18,7 @@ export const createGroups = () =>
                     )
             )
     )
+}
 
 export const getAllGroups = () =>
     Group.find()

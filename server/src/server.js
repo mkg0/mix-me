@@ -1,7 +1,10 @@
 import { join } from 'path'
 import express from 'express'
 
+// import { scheduleJob } from 'node-schedule'
+
 import configMongo from './configMongoDB'
+// import { createGroups } from './handlers/group'
 
 import helperRoutes from './helpers'
 import apiRoutes from './api'
@@ -14,6 +17,8 @@ export default () => {
     app.use('/api', apiRoutes)
 
     app.use('/helpers', helperRoutes)
+
+    // scheduleJob('*/2 * * * *', createGroups)
 
     // Serve static files from the React app
     app.use('/static', express.static(join(__dirname, '/public/static')))
