@@ -1,47 +1,50 @@
 import React from 'react'
-import { capitalize } from 'lodash'
+import { capitalize, get } from 'lodash'
 import Cookies from 'js-cookie'
 import { Redirect } from 'react-router-dom'
-import { compose, branch, withState, lifecycle } from 'recompose'
+import { compose, branch, withState, lifecycle, withProps } from 'recompose'
 
 import { Room } from 'material-ui-icons'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
 import { pink500 } from 'material-ui/styles/colors'
 
 function Match({ group, loading }) {
+  if (loading) {
+    return <div>Looking for your peers...</div>
+  }
+
   return (
-    <div>
+    <div style={{ color: 'black' }}>
       <AppBar showMenuIconButton={false} title="There is a match!" />
 
       <Subheader>Your group for today</Subheader>
 
-      {loading && <div>Looking for your peers...</div>}
-
-      {group && (
-        <div>
-          <List>
-            {group.names.map(({ name }) => (
-              <ListItem
-                disabled
-                key={name}
-                leftAvatar={<Avatar>{initials(name)}</Avatar>}
-                primaryText={fullName(name)}
-              />
-            ))}
-          </List>
-
-          <Divider />
-
-          <List>
-            <Subheader inset>We will meet at...</Subheader>
-
+      {get(group, 'names') ? (
+        <List>
+          {group.names.map(({ name }) => (
             <ListItem
               disabled
-              leftAvatar={<Avatar icon={<Room />} backgroundColor={pink500} />}
-              primaryText={group.location}
+              key={name}
+              leftAvatar={<Avatar>{initials(name)}</Avatar>}
+              primaryText={fullName(name)}
             />
-          </List>
-        </div>
+          ))}
+        </List>
+      ) : (
+        <div>We haven't found a group, yet. Please check again later.</div>
+      )}
+      <Divider />
+
+      {get(group, 'location') && (
+        <List>
+          <Subheader inset>We will meet at...</Subheader>
+
+          <ListItem
+            disabled
+            leftAvatar={<Avatar icon={<Room />} backgroundColor={pink500} />}
+            primaryText={group.location}
+          />
+        </List>
       )}
     </div>
   )
@@ -59,8 +62,10 @@ const initials = name => {
   return lastName.slice(0, 1).toUpperCase()
 }
 
+const redirectToRegister = () => () => <Redirect to="/register" />
+
 export default compose(
-  branch(() => !Cookies.get('name'), () => () => <Redirect to="/register" />),
+  branch(() => !Cookies.get('name'), redirectToRegister),
   withState('loading', 'toggleLoading', true),
   withState('group', 'setGroup', null),
   lifecycle({
