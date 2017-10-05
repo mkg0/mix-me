@@ -31,12 +31,7 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
       <Subheader style={whiteText}>
         Mix and Match - a way to get to know your colleagues
       </Subheader>
-      <Stepper
-        activeStep={step}
-        linear={false}
-        orientation="vertical"
-        style={stepperStyle}
-      >
+      <Stepper activeStep={step} linear={false} orientation="vertical">
         <Step>
           <StepButton onClick={() => onSelectStep(0)}>Register</StepButton>
           <StepContent>
