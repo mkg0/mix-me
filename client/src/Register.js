@@ -41,6 +41,7 @@ function Register({ onChange, onSubmit, registered, username }) {
                 hintStyle={hintStyle}
                 id="register-input"
                 className="register-input"
+                value={username}
                 onChange={onChange}
                 inputStyle={inputStyle}
                 hintText="firstname.lastname"
@@ -51,7 +52,7 @@ function Register({ onChange, onSubmit, registered, username }) {
           <div className="row">
             <div className="flex">
               <RaisedButton
-                disabled={!username.match(/^[a-z]+\.[a-z]+$/)}
+                disabled={!username.toLowerCase().match(/^[a-z]+\.[a-z]+$/)}
                 label="Mix Me!"
                 primary
                 onClick={onSubmit}
@@ -76,7 +77,7 @@ export default compose(
   withState('username', 'setUsername', ''),
   withHandlers({
     onChange: ({ setUsername }) => event => {
-      setUsername(event.target.value)
+      setUsername(event.target.value.toLowerCase())
     },
     onSubmit: ({ username, setRegistered, setError }) => () => {
       try {
