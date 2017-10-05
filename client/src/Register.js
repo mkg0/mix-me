@@ -40,8 +40,12 @@ function Register({ onChange, onSubmit, registered, username }) {
       {registered ? (
         <div className="row">
           <div className="flex">
-            <h3 className="signavio-color">You are signed up!</h3>
-            <p>We'll find a match for you as quick as possible!</p>
+            <h1>🎉</h1>
+            <h3 className="signavio-color">You are registered!</h3>
+            <p>
+              You are part of today's Mix and Match. We'll contact you before
+              lunch with information about your group.
+            </p>
           </div>
         </div>
       ) : (
@@ -81,14 +85,14 @@ function Register({ onChange, onSubmit, registered, username }) {
               />
             </div>
           </div>
+          <div className="row">
+            <div className="flex tutorial-link">
+              <span>New here? </span>
+              <Link to="/tutorial">Take the tutorial</Link>
+            </div>
+          </div>
         </div>
       )}
-      <div className="row">
-        <div className="flex tutorial-link">
-          <span>New here? </span>
-          <Link to="/tutorial">Take the tutorial</Link>
-        </div>
-      </div>
     </div>
   )
 }

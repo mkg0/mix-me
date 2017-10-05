@@ -9,7 +9,6 @@ import {
   StepButton,
   StepContent,
   RaisedButton,
-  FlatButton,
   Subheader,
   List,
   ListItem,
@@ -36,46 +35,36 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
                 leftAvatar={
                   <Avatar icon={<Assignment />} backgroundColor={indigo600} />
                 }
-                primaryText="Sign Up with your Signavio E-mail address"
+                primaryText="If you want to mix and match today, register with your Signavio e-mail address and, optionally,
+pick a food preference."
               />
             </List>
-            <RaisedButton primary label="Next" onClick={onNext} />
           </StepContent>
         </Step>
 
         <Step>
-          <StepButton onClick={() => onSelectStep(1)}>
-            Get a notification with your buddies group
-          </StepButton>
+          <StepButton onClick={() => onSelectStep(1)}>Match!</StepButton>
           <StepContent>
             <List>
               <ListItem
                 leftAvatar={
                   <Avatar icon={<MailOutline />} backgroundColor={indigo600} />
                 }
-                primaryText="Get E-mail notification"
+                primaryText="An hour before pre-lunch we'll notify you and tell you who you matched with."
               />
             </List>
-            <p>
-              Mix and Match will form a random group of colleagues and send you
-              E-mail invitation
-            </p>
-            <RaisedButton primary label="Next" onClick={onNext} />
-            <FlatButton label="Previous" onClick={onPrevious} />
           </StepContent>
         </Step>
 
         <Step>
-          <StepButton onClick={() => onSelectStep(2)}>
-            Meet and have fun!
-          </StepButton>
+          <StepButton onClick={() => onSelectStep(2)}>Meet</StepButton>
           <StepContent>
             <List>
               <ListItem
                 leftAvatar={
                   <Avatar icon={<TagFaces />} backgroundColor={pink500} />
                 }
-                primaryText="Meet at selected place after Pre-lunch and enjoy!"
+                primaryText="Meet your buddies after pre-lunch at the provided location and enjoy your lunch."
               />
             </List>
           </StepContent>
