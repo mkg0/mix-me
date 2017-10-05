@@ -1,6 +1,6 @@
-export default async function registerUser(username) {
+export default async function registerUser(name) {
   return await fetch('/api/matchme', {
     method: 'POST',
-    body: username,
+    body: JSON.stringify({ name }),
   })
 }
