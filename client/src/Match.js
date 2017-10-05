@@ -5,7 +5,7 @@ import { Room } from 'material-ui-icons'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
 import { pink500 } from 'material-ui/styles/colors'
 
-export default function Matches({ matches }) {
+export default function Match({ match }) {
   return (
     <div>
       <AppBar showMenuIconButton={false} title="There is a match!" />
@@ -13,7 +13,7 @@ export default function Matches({ matches }) {
       <Subheader>Your group for today</Subheader>
 
       <List>
-        {matches.names.map(({ name }) => (
+        {match.names.map(({ name }) => (
           <ListItem
             disabled
             key={name}
@@ -31,7 +31,7 @@ export default function Matches({ matches }) {
         <ListItem
           disabled
           leftAvatar={<Avatar icon={<Room />} backgroundColor={pink500} />}
-          primaryText={matches.location}
+          primaryText={match.location}
         />
       </List>
     </div>

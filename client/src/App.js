@@ -6,18 +6,9 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Cookies from 'js-cookie'
 
 import Register from './Register'
-import Matches from './Matches'
+import Match from './Match'
 import Tutorial from './Tutorial'
 import NotFound from './NotFound'
-
-const jonas = { name: 'jonas.hartweg' }
-const oleks = { name: 'oleks.hrishchuk' }
-const phil = { name: 'philipp.giese' }
-
-const matches = {
-  names: [jonas, oleks, phil],
-  location: 'The Signavio Lounge',
-}
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -26,7 +17,7 @@ const muiTheme = getMuiTheme({
   },
 })
 
-export default function MixMe() {
+export default function MixMe({ match }) {
   return (
     <MuiThemeProvider muiTheme={muiTheme}>
       <BrowserRouter>
@@ -34,22 +25,23 @@ export default function MixMe() {
           <Route path="/tutorial" component={Tutorial} />
           <Route path="/register" component={Register} />
           <Route
-            path="/matches"
+            path="/match"
             render={() =>
-              Cookies.get('name') ? (
-                <Matches matches={matches} />
+              Cookies.get('name') && match.location ? (
+                <Match match={match} />
               ) : (
                 <Redirect to="/register" />
               )}
           />
           <Route
             path="/"
-            render={() =>
-              Cookies.get('name') ? (
-                <Redirect to="/matches" />
-              ) : (
-                <Redirect to="/register" />
-              )}
+            render={() => {
+              if (Cookies.get('name') || match.location) {
+                return <Redirect to="/match" />
+              } else {
+                return <Redirect to="/register" />
+              }
+            }}
           />
           <Route component={NotFound} />
         </Switch>
