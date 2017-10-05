@@ -32,6 +32,15 @@ $ yarn start
 
 Navigate to `http://localhost:3000`
 
+**Proxy requests to the local server**
+
+Add
+
+```javascript
+"proxy": "http://localhost:8080"
+```
+to the `client/package.json` 
+
 ## Server
 
 **Install dependencies:**
