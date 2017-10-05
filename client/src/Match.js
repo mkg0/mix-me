@@ -2,7 +2,7 @@ import React from 'react'
 import { capitalize, get } from 'lodash'
 import Cookies from 'js-cookie'
 import { Redirect } from 'react-router-dom'
-import { compose, branch, withState, lifecycle, withProps } from 'recompose'
+import { compose, branch, withState, lifecycle } from 'recompose'
 
 import { Room } from 'material-ui-icons'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
