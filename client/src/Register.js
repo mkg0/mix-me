@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { compose, withHandlers, withStateHandlers } from 'recompose'
 import Cookies from 'js-cookie'
-
-import { compose, withHandlers, withState } from 'recompose'
-import './Register.css'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import registerUser from './api/service'
 import logo from './logo.jpg'
+import './Register.css'
 
 const hintStyle = {
   color: 'rgba(255, 255, 255, 0.6)',
@@ -98,13 +97,12 @@ function Register({ onChange, onSubmit, registered, username }) {
 }
 
 export default compose(
-  withState('error', 'setError', null),
-  withState('registered', 'setRegistered', !!Cookies.get('name')),
-  withState('username', 'setUsername', ''),
+  withStateHandlers(() => ({ username: '', error: null, registered: !!Cookies.get('name') }), {
+    onChange: ({ username }) => event => ({ username: event.target.value.toLowerCase() }),
+    setRegistered: () => registered => ({ registered }),
+    setError: () => error => ({ error }),
+  }),
   withHandlers({
-    onChange: ({ setUsername }) => event => {
-      setUsername(event.target.value.toLowerCase())
-    },
     onSubmit: ({ username, setRegistered, setError }) => () => {
       try {
         registerUser(username).then(() => {
