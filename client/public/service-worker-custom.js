@@ -1,11 +1,11 @@
 this.addEventListener('activate', () => {
-  setTimeout(() => {
+  setInterval(() => {
     this.registration.showNotification("It's a match!", {
       body: 'We found a Mix & Match group for you',
       icon: 'hamburger.png',
       badge: 'hamburger.png',
     })
-  }, 5000)
+  }, 10 * 1000)
 })
 
 this.addEventListener('notificationclick', event => {
