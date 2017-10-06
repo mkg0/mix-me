@@ -2,6 +2,7 @@ import React from 'react'
 import { capitalize, get } from 'lodash'
 import Cookies from 'js-cookie'
 import { compose, withState, lifecycle } from 'recompose'
+import Spinner from 'react-spinkit'
 
 import { Room } from 'material-ui-icons'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
@@ -9,14 +10,10 @@ import { pink500 } from 'material-ui/styles/colors'
 
 import { registerIfNeeded } from './higher-order'
 
-function Match({ group, loading }) {
-  if (loading) {
-    return <div>Looking for your peers...</div>
-  }
-
+function Match({ group }) {
   return (
     <div style={{ color: 'black' }}>
-      {group.location ? (
+      {get(group, 'location') ? (
         <div>
           <AppBar showMenuIconButton={false} title="There is a match!" />
           <Subheader>Your group for today</Subheader>
@@ -45,11 +42,22 @@ function Match({ group, loading }) {
           style={{
             paddingLeft: 16,
             paddingRight: 16,
-            paddingTop: 200,
+            paddingTop: 150,
             textAlign: 'center',
           }}
         >
-          We haven't found a group, yet.<br /> Please check again later.
+          <div
+            style={{
+              marginLeft: '50%',
+              transform: 'translate(-15%)',
+              marginBottom: 50,
+              opacity: 0.5,
+            }}
+          >
+            <Spinner name="pacman" />
+          </div>
+          We haven't found a group, yet.<br />
+          Please check again later.
         </div>
       )}
 
@@ -82,18 +90,24 @@ const initials = name => {
 
 export default compose(
   registerIfNeeded,
-  withState('loading', 'toggleLoading', true),
   withState('group', 'setGroup', null),
   lifecycle({
     componentWillMount() {
-      const { toggleLoading, setGroup } = this.props
+      const { setGroup } = this.props
 
-      fetch(`/api/match?name=${Cookies.get('name')}`)
-        .then(response => response.json())
-        .then(group => {
-          setGroup(group)
-          toggleLoading(false)
-        })
+      const fetchGroup = () => {
+        fetch(`/api/match?name=${Cookies.get('name')}`)
+          .then(response => response.json())
+          .then(group => {
+            setGroup(group)
+          })
+      }
+
+      this.timer = setInterval(fetchGroup, 10 * 1000)
+    },
+
+    componentWillUnmount() {
+      clearImmediate(this.timer)
     },
   })
 )(Match)
