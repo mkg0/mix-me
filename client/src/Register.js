@@ -76,6 +76,8 @@ function Registered() {
           You are part of today's Mix and Match.<br />
           We'll contact you before lunch with information about your group.
         </p>
+
+        <Link to="/match">Show me my mates</Link>
       </div>
     </div>
   )

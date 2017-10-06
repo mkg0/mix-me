@@ -5,6 +5,8 @@ import { compose, withState, lifecycle } from 'recompose'
 import Spinner from 'react-spinkit'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
 
+import SignavioLogo from './SignavioLogo.png'
+
 import RestaurantGrid from './RestaurantGrid'
 
 function Match({ group }) {
@@ -66,7 +68,7 @@ function Match({ group }) {
               disabled
               leftAvatar={
                 <img
-                  src="SignavioLogo.png"
+                  src={SignavioLogo}
                   style={{ width: 26, margin: '6px 0 0 6px' }}
                 />
               }
