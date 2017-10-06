@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import bodyParser from 'body-parser'
 
-import { Location } from './models'
+import { Location, Restaurants } from './models'
 
 import { createGroups, getAllGroups } from './handlers/group'
 
@@ -40,5 +40,15 @@ export default Router()
             })
             .catch(reason => {
                 res.status(400).send(reason)
+            })
+    })
+    .post('/addRestaurants', bodyParser.json(), (req, res) => {
+        new Restaurants(req.body)
+            .save()
+            .then(() => {
+                res.status(204).send()
+            })
+            .catch(error => {
+                res.status(400).send(error)
             })
     })
