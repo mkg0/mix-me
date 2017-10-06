@@ -101,12 +101,13 @@ export default compose(
     onChange: ({ username }) => event => ({
       username: event.target.value.toLowerCase(),
     }),
+    setRegistered: () => registered => ({ registered }),
   }),
   withHandlers({
-    onSubmit: ({ username, history }) => () => {
+    onSubmit: ({ username, history, setRegistered }) => () => {
       registerUser(username).then(() => {
         Cookies.set('name', username)
-        history.push('/match')
+        setRegistered(true)
 
         if (
           'Notification' in window &&

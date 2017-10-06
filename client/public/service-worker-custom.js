@@ -17,7 +17,7 @@ this.addEventListener('activate', () => {
       icon: 'hamburger.png',
       badge: 'hamburger.png',
     })
-  }, 60 * 1000)
+  }, getNextExecution())
 })
 
 this.addEventListener('notificationclick', event => {
