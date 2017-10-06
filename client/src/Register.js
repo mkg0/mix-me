@@ -16,6 +16,7 @@ const hintStyle = {
 
 const inputStyle = {
   color: 'white',
+  backgroundColor: '#030f21',
 }
 
 function RegistrationForm({ onChange, onSubmit, registered, username }) {

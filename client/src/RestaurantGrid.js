@@ -77,7 +77,7 @@ const GridListExampleSimple = () => (
             </IconButton>
           }
         >
-          <img src={tile.img} />
+          <img src={tile.img} alt={tile.title} />
         </GridTile>
       ))}
     </GridList>

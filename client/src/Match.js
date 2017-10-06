@@ -70,6 +70,7 @@ function Match({ group }) {
                 <img
                   src={SignavioLogo}
                   style={{ width: 26, margin: '6px 0 0 6px' }}
+                  alt="Signavio Logo"
                 />
               }
               primaryText={group.location}
