@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import { BrowserRouter, Redirect } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Cookies from 'js-cookie'
@@ -22,13 +22,11 @@ export default function MixMe({ group }) {
       <BrowserRouter>
         <Switch>
           <Route path="/tutorial" component={Tutorial} />
-          <Route path="/register" component={Register} />
-          <Route path="/match" component={Match} />
 
           {Cookies.get('name') ? (
-            <Redirect to="/match" />
+            <Match />
           ) : (
-            <Redirect to="/register" />
+            <Register />
           )}
         </Switch>
       </BrowserRouter>
