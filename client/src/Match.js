@@ -9,6 +9,7 @@ import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
 import { pink500 } from 'material-ui/styles/colors'
 
 import { registerIfNeeded } from './higher-order'
+import RestaurantGrid from './RestaurantGrid'
 
 function Match({ group }) {
   return (
@@ -16,7 +17,6 @@ function Match({ group }) {
       {get(group, 'location') ? (
         <div>
           <AppBar showMenuIconButton={false} title="There is a match!" />
-          <Subheader>Your group for today</Subheader>
         </div>
       ) : (
         <AppBar showMenuIconButton={false} title="You dont have a match yet" />
@@ -24,6 +24,7 @@ function Match({ group }) {
 
       {get(group, 'names') ? (
         <div>
+          <Subheader>Your group for today</Subheader>
           <List>
             {group.names.map(({ name }) => (
               <ListItem
@@ -61,15 +62,23 @@ function Match({ group }) {
       )}
 
       {get(group, 'location') && (
-        <List>
-          <Subheader inset>We will meet at...</Subheader>
-
-          <ListItem
-            disabled
-            leftAvatar={<Avatar icon={<Room />} backgroundColor={pink500} />}
-            primaryText={group.location}
-          />
-        </List>
+        <div>
+          <Divider />
+          <Subheader>Meet your buddies at...</Subheader>
+          <List>
+            <ListItem
+              disabled
+              leftAvatar={
+                <img
+                  src="SignavioLogo.png"
+                  style={{ width: 26, margin: '6px 0 0 6px' }}
+                />
+              }
+              primaryText={group.location}
+            />
+          </List>
+          <RestaurantGrid />
+        </div>
       )}
     </div>
   )
