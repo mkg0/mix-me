@@ -5,7 +5,9 @@ const getNextExecution = () => {
   if (now.getHours() < 11) {
     return new Date().setHours(11, 0, 0, 0) - now
   }
-  return new Date().setDate(now.getDate() + 1).setHours(11, 0, 0, 0) - now
+  return new Date(
+    new Date().setDate(now.getDate() + 1)
+  ).setHours(11, 0, 0, 0) - now
 }
 
 this.addEventListener('activate', () => {
