@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
-    entry: ['./src/index'],
+    entry: ['babel-core/register', 'babel-polyfill', './src/index'],
     watch: false,
     target: 'node',
     node: {
