@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
-    entry: ['babel-core/register', 'babel-polyfill', './src/index'],
+    entry: ['./src/index'],
     watch: false,
     target: 'node',
     node: {
@@ -21,6 +21,7 @@ module.exports = {
     plugins: [
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.IgnorePlugin(/vertx/),
     ],
     output: {
         path: path.join(__dirname, 'build'),

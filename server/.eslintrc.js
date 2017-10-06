@@ -12,7 +12,11 @@ module.exports = {
         'import/no-extraneous-dependencies': [
             'error',
             {
-                devDependencies: ['**/test/**', '**/tools/**'],
+                devDependencies: [
+                    '**/test/**',
+                    '**/tools/**',
+                    '**/webpack.config.*.js',
+                ],
             },
         ],
     },

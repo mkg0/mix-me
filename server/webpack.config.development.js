@@ -4,12 +4,7 @@ const nodeExternals = require('webpack-node-externals')
 const StartServerPlugin = require('start-server-webpack-plugin')
 
 module.exports = {
-    entry: [
-        'webpack/hot/poll?1000',
-        'babel-core/register',
-        'babel-polyfill',
-        './src/index',
-    ],
+    entry: ['webpack/hot/poll?1000', './src/index'],
     watch: true,
     target: 'node',
     node: {
@@ -35,6 +30,7 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.IgnorePlugin(/vertx/),
     ],
     output: {
         path: path.join(__dirname, 'build'),

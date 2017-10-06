@@ -1,3 +1,5 @@
+import 'babel-polyfill'
+
 import http from 'http'
 import nconf from 'nconf'
 import config from './config'
