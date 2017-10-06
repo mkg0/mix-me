@@ -7,11 +7,7 @@ import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
 
 import RestaurantGrid from './RestaurantGrid'
 
-function Match({ group, loading }) {
-  if (loading) {
-    return <div>Looking for your peers...</div>
-  }
-
+function Match({ group }) {
   return (
     <div style={{ color: 'black' }}>
       {get(group, 'location') ? (
@@ -97,7 +93,6 @@ const initials = name => {
 }
 
 export default compose(
-  withState('loading', 'toggleLoading', true),
   withState('group', 'setGroup', null),
   lifecycle({
     componentWillMount() {
