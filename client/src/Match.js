@@ -8,10 +8,13 @@ import { Room } from 'material-ui-icons'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
 import { pink500 } from 'material-ui/styles/colors'
 
-import { registerIfNeeded } from './higher-order'
 import RestaurantGrid from './RestaurantGrid'
 
-function Match({ group }) {
+function Match({ group, loading }) {
+  if (loading) {
+    return <div>Looking for your peers...</div>
+  }
+
   return (
     <div style={{ color: 'black' }}>
       {get(group, 'location') ? (
@@ -97,7 +100,7 @@ const initials = name => {
 }
 
 export default compose(
-  registerIfNeeded,
+  withState('loading', 'toggleLoading', true),
   withState('group', 'setGroup', null),
   lifecycle({
     componentWillMount() {

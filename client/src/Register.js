@@ -4,7 +4,6 @@ import { compose, withHandlers, withStateHandlers } from 'recompose'
 import Cookies from 'js-cookie'
 import { TextField, RaisedButton } from 'material-ui'
 
-import { matchIfRegistered } from './higher-order'
 import { registerUser } from './api'
 import logo from './logo.jpg'
 import './Register.css'
@@ -96,7 +95,6 @@ function Register(props) {
 }
 
 export default compose(
-  matchIfRegistered,
   withStateHandlers(() => ({ username: '' }), {
     onChange: ({ username }) => event => ({
       username: event.target.value.toLowerCase(),

@@ -1,13 +1,11 @@
 import React from 'react'
-import { Route, Switch } from 'react-router'
+import { Route, Switch, Redirect } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import Cookies from 'js-cookie'
 
-import Register from './Register'
-import Match from './Match'
 import Tutorial from './Tutorial'
+import Main from './Main'
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -21,13 +19,10 @@ export default function MixMe({ group }) {
     <MuiThemeProvider muiTheme={muiTheme}>
       <BrowserRouter>
         <Switch>
+          <Route path="/" exact component={Main} />
           <Route path="/tutorial" component={Tutorial} />
 
-          {Cookies.get('name') ? (
-            <Match />
-          ) : (
-            <Register />
-          )}
+          <Redirect to="/" />
         </Switch>
       </BrowserRouter>
     </MuiThemeProvider>
