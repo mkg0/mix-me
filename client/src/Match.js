@@ -3,10 +3,7 @@ import { capitalize, get } from 'lodash'
 import Cookies from 'js-cookie'
 import { compose, withState, lifecycle } from 'recompose'
 import Spinner from 'react-spinkit'
-
-import { Room } from 'material-ui-icons'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
-import { pink500 } from 'material-ui/styles/colors'
 
 import RestaurantGrid from './RestaurantGrid'
 
