@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { compose, withHandlers, withStateHandlers } from 'recompose'
 import Cookies from 'js-cookie'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import registerUser from './api/service'
+import { TextField, RaisedButton } from 'material-ui'
+
+import { matchIfRegistered } from './higher-order'
+import { registerUser } from './api'
 import logo from './logo.jpg'
 import './Register.css'
 
@@ -97,38 +98,35 @@ function Register({ onChange, onSubmit, registered, username }) {
 }
 
 export default compose(
-  withStateHandlers(() => ({ username: '', error: null, registered: !!Cookies.get('name') }), {
-    onChange: ({ username }) => event => ({ username: event.target.value.toLowerCase() }),
-    setRegistered: () => registered => ({ registered }),
-    setError: () => error => ({ error }),
+  matchIfRegistered,
+  withStateHandlers(() => ({ username: '' }), {
+    onChange: ({ username }) => event => ({
+      username: event.target.value.toLowerCase(),
+    }),
   }),
   withHandlers({
-    onSubmit: ({ username, setRegistered, setError }) => () => {
-      try {
-        registerUser(username).then(() => {
-          setRegistered(true)
-          Cookies.set('name', username)
+    onSubmit: ({ username, history }) => () => {
+      registerUser(username).then(() => {
+        Cookies.set('name', username)
+        history.push('/match')
 
-          // Let's check if the browser supports notifications
-          if (!('Notification' in window)) {
-            alert('This browser does not support desktop notification')
-          } else if (Notification.permission === 'granted') {
-            // Let's check whether notification permissions have already been granted
-            // If it's okay let's create a notification
-            console.log('Notification access already granted')
-          } else if (Notification.permission !== 'denied') {
-            // Otherwise, we need to ask the user for permission
-            Notification.requestPermission(function(permission) {
-              // If the user accepts, let's create a notification
-              if (permission === 'granted') {
-                console.log('Notification access granted')
-              }
-            })
-          }
-        })
-      } catch (error) {
-        setError(error)
-      }
+        // Let's check if the browser supports notifications
+        if (!('Notification' in window)) {
+          alert('This browser does not support desktop notification')
+        } else if (Notification.permission === 'granted') {
+          // Let's check whether notification permissions have already been granted
+          // If it's okay let's create a notification
+          console.log('Notification access already granted')
+        } else if (Notification.permission !== 'denied') {
+          // Otherwise, we need to ask the user for permission
+          Notification.requestPermission(function(permission) {
+            // If the user accepts, let's create a notification
+            if (permission === 'granted') {
+              console.log('Notification access granted')
+            }
+          })
+        }
+      })
     },
   })
 )(Register)
