@@ -25,20 +25,32 @@ function Match({ group, loading }) {
       )}
 
       {get(group, 'names') ? (
-        <List>
-          {group.names.map(({ name }) => (
-            <ListItem
-              disabled
-              key={name}
-              leftAvatar={<Avatar>{initials(name)}</Avatar>}
-              primaryText={fullName(name)}
-            />
-          ))}
-        </List>
+        <div>
+          <List>
+            {group.names.map(({ name }) => (
+              <ListItem
+                disabled
+                key={name}
+                leftAvatar={<Avatar>{initials(name)}</Avatar>}
+                primaryText={fullName(name)}
+              />
+            ))}
+          </List>
+
+          <Divider />
+        </div>
       ) : (
-        <div>We haven't found a group, yet. Please check again later.</div>
+        <div
+          style={{
+            paddingLeft: 16,
+            paddingRight: 16,
+            paddingTop: 200,
+            textAlign: 'center',
+          }}
+        >
+          We haven't found a group, yet.<br /> Please check again later.
+        </div>
       )}
-      <Divider />
 
       {get(group, 'location') && (
         <List>

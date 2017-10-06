@@ -27,8 +27,8 @@ body {
 }
 
 .flex {
-  padding: 0.3rem;
-  margin: 0.3rem;
+  padding: 0.4rem;
+  margin: 0.4rem;
   flex: 1;
   flex-basis: 100%;
 }

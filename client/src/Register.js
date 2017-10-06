@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { compose, withHandlers, withStateHandlers } from 'recompose'
 import Cookies from 'js-cookie'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import registerUser from './api/service'
+import { TextField, RaisedButton } from 'material-ui'
+
+import { matchIfRegistered } from './higher-order'
+import { registerUser } from './api'
 import logo from './logo.jpg'
 import './Register.css'
 
@@ -19,7 +20,15 @@ const inputStyle = {
 
 function RegistrationForm({ onChange, onSubmit, registered, username }) {
   return (
-    <div>
+    <div className="register-form">
+      <div className="row">
+        <div className="flex">
+          <span>
+            Feeling social?<br />
+            Mix and Match today!
+          </span>
+        </div>
+      </div>
       <div className="row">
         <div className="flex">
           <TextField
@@ -87,40 +96,32 @@ function Register(props) {
 }
 
 export default compose(
-  withStateHandlers(
-    () => ({ username: '', error: null, registered: !!Cookies.get('name') }),
-    {
-      onChange: ({ username }) => event => ({
-        username: event.target.value.toLowerCase(),
-      }),
-      setRegistered: () => registered => ({ registered }),
-      setError: () => error => ({ error }),
-    }
-  ),
+  matchIfRegistered,
+  withStateHandlers(() => ({ username: '' }), {
+    onChange: ({ username }) => event => ({
+      username: event.target.value.toLowerCase(),
+    }),
+  }),
   withHandlers({
-    onSubmit: ({ username, setRegistered, setError }) => () => {
-      try {
-        registerUser(username).then(() => {
-          setRegistered(true)
-          Cookies.set('name', username)
+    onSubmit: ({ username, history }) => () => {
+      registerUser(username).then(() => {
+        Cookies.set('name', username)
+        history.push('/match')
 
-          if (
-            'Notification' in window &&
-            Notification.permission !== 'granted' &&
-            Notification.permission !== 'denied'
-          ) {
-            // Otherwise, we need to ask the user for permission
-            Notification.requestPermission(function(permission) {
-              // If the user accepts, let's create a notification
-              if (permission === 'granted') {
-                console.log('Notification access granted')
-              }
-            })
-          }
-        })
-      } catch (error) {
-        setError(error)
-      }
+        if (
+          'Notification' in window &&
+          Notification.permission !== 'granted' &&
+          Notification.permission !== 'denied'
+        ) {
+          // Otherwise, we need to ask the user for permission
+          Notification.requestPermission(function(permission) {
+            // If the user accepts, let's create a notification
+            if (permission === 'granted') {
+              console.log('Notification access granted')
+            }
+          })
+        }
+      })
     },
   })
 )(Register)

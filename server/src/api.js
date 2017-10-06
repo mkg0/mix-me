@@ -1,9 +1,8 @@
 import { Router } from 'express'
 import bodyParser from 'body-parser'
 
-import { Person } from './models'
-
 import { getGroupForName } from './handlers/group'
+import { createPerson } from './handlers/person'
 
 export default Router()
     .get('/match', (req, res) => {
@@ -18,10 +17,8 @@ export default Router()
             })
     })
     .post('/matchme', bodyParser.json(), (req, res) => {
-        new Person(req.body)
-            .save()
-            .then(({ name }) => {
-                console.log('created', name)
+        createPerson(req.body)
+            .then(() => {
                 res.status(204).send()
             })
             .catch(err => {

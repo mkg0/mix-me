@@ -9,7 +9,6 @@ import {
   StepButton,
   StepContent,
   RaisedButton,
-  Subheader,
   List,
   ListItem,
   Avatar,
@@ -22,10 +21,6 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
   return (
     <div>
       <AppBar showMenuIconButton={false} title="Tutorial" />
-
-      <Subheader>
-        Mix and Match - a way to get to know your colleagues
-      </Subheader>
       <Stepper activeStep={step} linear={false} orientation="vertical">
         <Step>
           <StepButton onClick={() => onSelectStep(0)}>Register</StepButton>
@@ -35,8 +30,7 @@ function Tutorial({ step, onNext, onPrevious, onSelectStep, history }) {
                 leftAvatar={
                   <Avatar icon={<Assignment />} backgroundColor={indigo600} />
                 }
-                primaryText="If you want to mix and match today, register with your Signavio e-mail address and, optionally,
-pick a food preference."
+                primaryText="If you want to mix and match today, register with your Signavio e-mail address. We'll find you buddies to have lunch with."
               />
             </List>
           </StepContent>
@@ -71,7 +65,7 @@ pick a food preference."
         </Step>
       </Stepper>
       <div style={{ marginTop: 20, marginLeft: 20 }}>
-        <RaisedButton label="Go back" onClick={() => history.goBack()} />
+        <RaisedButton label="Back" onClick={() => history.goBack()} />
       </div>
     </div>
   )

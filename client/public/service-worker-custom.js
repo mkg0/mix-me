@@ -1,11 +1,23 @@
+const getNextExecution = () => {
+  const now = new Date()
+  let next
+
+  if (now.getHours() < 11) {
+    return new Date().setHours(11, 0, 0, 0) - now
+  }
+  return new Date().setDate(now.getDate() + 1).setHours(11, 0, 0, 0) - now
+}
+
 this.addEventListener('activate', () => {
-  setInterval(() => {
+  console.log(getNextExecution() / 1000 / 60)
+
+  setTimeout(() => {
     this.registration.showNotification("It's a match!", {
       body: 'We found a Mix & Match group for you',
       icon: 'hamburger.png',
       badge: 'hamburger.png',
     })
-  }, 10 * 1000)
+  }, 60 * 1000)
 })
 
 this.addEventListener('notificationclick', event => {

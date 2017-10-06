@@ -21,6 +21,7 @@ module.exports = {
     plugins: [
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.IgnorePlugin(/vertx/),
     ],
     output: {
         path: path.join(__dirname, 'build'),

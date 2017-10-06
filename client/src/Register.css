@@ -1,13 +1,16 @@
 img {
   width: 100%;
-  margin-bottom: 20px;
 }
 
 .register-wrapper {
   height: 100%;
 
   text-align: center;
-  background-color: #212125;
+  background-color: #030f21;
+}
+
+.register-form {
+  margin-top: 20px;
 }
 
 input {
@@ -17,7 +20,7 @@ input {
 
 .tutorial-link {
   font-weight: 300;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .tutorial-link a {
