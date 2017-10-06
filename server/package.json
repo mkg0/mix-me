@@ -27,6 +27,8 @@
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.0",
+    "express-sslify": "^1.2.0",
+    "helmet": "^3.8.2",
     "lodash": "^4.17.4",
     "mongoose": "^4.11.14",
     "nconf": "^0.8.5",

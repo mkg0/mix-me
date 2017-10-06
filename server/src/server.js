@@ -9,10 +9,13 @@ import configMongo from './configMongoDB'
 import helperRoutes from './helpers'
 import apiRoutes from './api'
 
+import addSecurity from './security'
+
 export default () => {
     configMongo()
 
     const app = express()
+    addSecurity(app)
 
     app.use('/api', apiRoutes)
 
