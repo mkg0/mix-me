@@ -1,3 +1,4 @@
 import matchIfRegistered from './matchIfRegistered'
+import registerIfNeeded from './registerIfNeeded'
 
-export { matchIfRegistered }
+export { matchIfRegistered, registerIfNeeded }

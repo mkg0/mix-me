@@ -1,12 +1,13 @@
 import React from 'react'
 import { capitalize, get } from 'lodash'
 import Cookies from 'js-cookie'
-import { Redirect } from 'react-router-dom'
-import { compose, branch, withState, lifecycle } from 'recompose'
+import { compose, withState, lifecycle } from 'recompose'
 
 import { Room } from 'material-ui-icons'
 import { Subheader, List, ListItem, Avatar, AppBar, Divider } from 'material-ui'
 import { pink500 } from 'material-ui/styles/colors'
+
+import { registerIfNeeded } from './higher-order'
 
 function Match({ group, loading }) {
   if (loading) {
@@ -79,10 +80,8 @@ const initials = name => {
   return lastName.slice(0, 1).toUpperCase()
 }
 
-const redirectToRegister = () => () => <Redirect to="/register" />
-
 export default compose(
-  branch(() => !Cookies.get('name'), redirectToRegister),
+  registerIfNeeded,
   withState('loading', 'toggleLoading', true),
   withState('group', 'setGroup', null),
   lifecycle({
