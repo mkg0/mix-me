@@ -15,9 +15,14 @@ function Match({ group, loading }) {
 
   return (
     <div style={{ color: 'black' }}>
-      <AppBar showMenuIconButton={false} title="There is a match!" />
-
-      <Subheader>Your group for today</Subheader>
+      {group.location ? (
+        <div>
+          <AppBar showMenuIconButton={false} title="There is a match!" />
+          <Subheader>Your group for today</Subheader>
+        </div>
+      ) : (
+        <AppBar showMenuIconButton={false} title="You dont have a match yet" />
+      )}
 
       {get(group, 'names') ? (
         <List>
