@@ -17,18 +17,63 @@ const inputStyle = {
   color: 'white',
 }
 
-const preferences = [
-  { title: '🤷', value: 'indifferent' },
-  { title: '🍕', value: 'pizza' },
-  { title: '🍔', value: 'burgers' },
-  { title: '🌯', value: 'burritos' },
-  { title: '🥕', value: 'vegetarian' },
-  { title: '🍱', value: 'sushi' },
-  { title: '🍛', value: 'thai' },
-  { title: '🍺', value: 'beers' },
-]
+function RegistrationForm({ onChange, onSubmit, registered, username }) {
+  return (
+    <div>
+      <div className="row">
+        <div className="flex">
+          <TextField
+            hintStyle={hintStyle}
+            id="register-input"
+            className="register-input"
+            value={username}
+            onChange={onChange}
+            inputStyle={inputStyle}
+            hintText="firstname.lastname"
+          />
+          <span className="signavio-color">@signavio.com</span>
+        </div>
+      </div>
+      <div className="row">
+        <div className="flex">
+          <RaisedButton
+            disabled={!username.toLowerCase().match(/^[a-z]+\.[a-z]+$/)}
+            label="Mix Me!"
+            primary
+            onClick={onSubmit}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="flex tutorial-link">
+          <span>New here? </span>
+          <Link to="/tutorial">Take the tutorial</Link>
+        </div>
+      </div>
+    </div>
+  )
+}
 
-function Register({ onChange, onSubmit, registered, username }) {
+function Registered() {
+  return (
+    <div className="row">
+      <div className="flex">
+        <h1>
+          <span role="img" aria-label="success">
+            🎉
+          </span>
+        </h1>
+        <h3 className="signavio-color">You are registered!</h3>
+        <p>
+          You are part of today's Mix and Match.<br />
+          We'll contact you before lunch with information about your group.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function Register(props) {
   return (
     <div className="register-wrapper">
       <div className="row">
@@ -36,72 +81,22 @@ function Register({ onChange, onSubmit, registered, username }) {
           <img src={logo} alt="Mix-Me logo" />
         </div>
       </div>
-      {registered ? (
-        <div className="row">
-          <div className="flex">
-            <h1>🎉</h1>
-            <h3 className="signavio-color">You are registered!</h3>
-            <p>
-              You are part of today's Mix and Match. We'll contact you before
-              lunch with information about your group.
-            </p>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div className="row">
-            <div className="flex">
-              <TextField
-                hintStyle={hintStyle}
-                id="register-input"
-                className="register-input"
-                value={username}
-                onChange={onChange}
-                inputStyle={inputStyle}
-                hintText="firstname.lastname"
-              />
-              <span className="signavio-color">@signavio.com</span>
-            </div>
-          </div>
-          <div className="row">
-            <div className="flex">
-              <select className="food-preferences">
-                {preferences.map(({ value, title }) => (
-                  <option key={value} value={value}>
-                    {title}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="row">
-            <div className="flex">
-              <RaisedButton
-                disabled={!username.toLowerCase().match(/^[a-z]+\.[a-z]+$/)}
-                label="Mix Me!"
-                primary
-                onClick={onSubmit}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="flex tutorial-link">
-              <span>New here? </span>
-              <Link to="/tutorial">Take the tutorial</Link>
-            </div>
-          </div>
-        </div>
-      )}
+      {props.registered ? <Registered /> : <RegistrationForm {...props} />}
     </div>
   )
 }
 
 export default compose(
-  withStateHandlers(() => ({ username: '', error: null, registered: !!Cookies.get('name') }), {
-    onChange: ({ username }) => event => ({ username: event.target.value.toLowerCase() }),
-    setRegistered: () => registered => ({ registered }),
-    setError: () => error => ({ error }),
-  }),
+  withStateHandlers(
+    () => ({ username: '', error: null, registered: !!Cookies.get('name') }),
+    {
+      onChange: ({ username }) => event => ({
+        username: event.target.value.toLowerCase(),
+      }),
+      setRegistered: () => registered => ({ registered }),
+      setError: () => error => ({ error }),
+    }
+  ),
   withHandlers({
     onSubmit: ({ username, setRegistered, setError }) => () => {
       try {
@@ -109,14 +104,11 @@ export default compose(
           setRegistered(true)
           Cookies.set('name', username)
 
-          // Let's check if the browser supports notifications
-          if (!('Notification' in window)) {
-            alert('This browser does not support desktop notification')
-          } else if (Notification.permission === 'granted') {
-            // Let's check whether notification permissions have already been granted
-            // If it's okay let's create a notification
-            console.log('Notification access already granted')
-          } else if (Notification.permission !== 'denied') {
+          if (
+            'Notification' in window &&
+            Notification.permission !== 'granted' &&
+            Notification.permission !== 'denied'
+          ) {
             // Otherwise, we need to ask the user for permission
             Notification.requestPermission(function(permission) {
               // If the user accepts, let's create a notification
