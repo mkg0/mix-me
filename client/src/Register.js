@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import { compose, withHandlers, withStateHandlers } from 'recompose'
 import Cookies from 'js-cookie'
 import { TextField, RaisedButton } from 'material-ui'
@@ -103,11 +104,12 @@ export default compose(
     }),
     setRegistered: () => registered => ({ registered }),
   }),
+  withRouter,
   withHandlers({
     onSubmit: ({ username, history, setRegistered }) => () => {
       registerUser(username).then(() => {
         Cookies.set('name', username)
-        setRegistered(true)
+        history.push('/match')
 
         if (
           'Notification' in window &&
