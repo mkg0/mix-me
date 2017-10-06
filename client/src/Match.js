@@ -56,8 +56,7 @@ function Match({ group }) {
           >
             <Spinner name="pacman" />
           </div>
-          We haven't found a group, yet.<br />
-          Please check again later.
+          We haven't found a group, yet but we're busy looking for one.
         </div>
       )}
 
@@ -102,6 +101,8 @@ export default compose(
             setGroup(group)
           })
       }
+
+      fetchGroup()
 
       this.timer = setInterval(fetchGroup, 10 * 1000)
     },
