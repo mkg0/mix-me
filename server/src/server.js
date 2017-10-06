@@ -1,5 +1,6 @@
 import { join } from 'path'
 import express from 'express'
+import compression from 'compression'
 
 // import { scheduleJob } from 'node-schedule'
 
@@ -22,7 +23,7 @@ export default () => {
     app.use('/helpers', helperRoutes)
 
     // scheduleJob('*/2 * * * *', createGroups)
-
+    app.use(compression())
     // Serve static files from the React app
     app.use('/static', express.static(join(__dirname, '/public/static')))
 
