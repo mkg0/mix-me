@@ -4,6 +4,7 @@ const path = require('path')
 module.exports = {
     entry: ['./src/index'],
     watch: false,
+    cache: false,
     target: 'node',
     node: {
         __filename: false,

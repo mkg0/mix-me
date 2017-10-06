@@ -4,14 +4,9 @@ import bodyParser from 'body-parser'
 import { Location } from './models'
 
 import { createGroups, getAllGroups } from './handlers/group'
+import { activatePeople } from './handlers/person'
 
 export default Router()
-    .use((req, res, next) => {
-        if (req.headers.auth !== 'mix-me') {
-            return res.status(401).send()
-        }
-        return next()
-    })
     .get('/makegroups', (req, res) => {
         createGroups()
             .then(() => {
@@ -31,6 +26,10 @@ export default Router()
                 console.log(err)
                 res.status(400).send(err)
             })
+    })
+    .post('/activatepeople', async (req, res) => {
+        await activatePeople()
+        res.status(204).send()
     })
     .post('/addlocation', bodyParser.json(), (req, res) => {
         new Location(req.body)

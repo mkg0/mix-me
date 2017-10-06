@@ -11,3 +11,8 @@ export const createPerson = async ({ name, active = true }) => {
 }
 
 export const getAllPeople = async (query = {}) => Person.find(query)
+
+export const activatePeople = async () => {
+    const people = await getAllPeople()
+    await Promise.all(people.map(person => person.update({ active: true })))
+}
