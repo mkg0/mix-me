@@ -29,7 +29,7 @@ const preferences = [
   { title: '🍺', value: 'beers' },
 ]
 
-function Register({ onChange, onSubmit, registered, username }) {
+function Register({ onChange, onSubmit, username }) {
   return (
     <div className="register-wrapper">
       <div className="row">
@@ -37,62 +37,48 @@ function Register({ onChange, onSubmit, registered, username }) {
           <img src={logo} alt="Mix-Me logo" />
         </div>
       </div>
-      {registered ? (
-        <div className="row">
-          <div className="flex">
-            <h1>🎉</h1>
-            <h3 className="signavio-color">You are registered!</h3>
-            <p>
-              You are part of today's Mix and Match. We'll contact you before
-              lunch with information about your group.
-            </p>
-          </div>
+
+      <div className="row">
+        <div className="flex">
+          <TextField
+            hintStyle={hintStyle}
+            id="register-input"
+            className="register-input"
+            value={username}
+            onChange={onChange}
+            inputStyle={inputStyle}
+            hintText="firstname.lastname"
+          />
+          <span className="signavio-color">@signavio.com</span>
         </div>
-      ) : (
-        <div>
-          <div className="row">
-            <div className="flex">
-              <TextField
-                hintStyle={hintStyle}
-                id="register-input"
-                className="register-input"
-                value={username}
-                onChange={onChange}
-                inputStyle={inputStyle}
-                hintText="firstname.lastname"
-              />
-              <span className="signavio-color">@signavio.com</span>
-            </div>
-          </div>
-          <div className="row">
-            <div className="flex">
-              <select className="food-preferences">
-                {preferences.map(({ value, title }) => (
-                  <option key={value} value={value}>
-                    {title}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="row">
-            <div className="flex">
-              <RaisedButton
-                disabled={!username.toLowerCase().match(/^[a-z]+\.[a-z]+$/)}
-                label="Mix Me!"
-                primary
-                onClick={onSubmit}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="flex tutorial-link">
-              <span>New here? </span>
-              <Link to="/tutorial">Take the tutorial</Link>
-            </div>
-          </div>
+      </div>
+      <div className="row">
+        <div className="flex">
+          <select className="food-preferences">
+            {preferences.map(({ value, title }) => (
+              <option key={value} value={value}>
+                {title}
+              </option>
+            ))}
+          </select>
         </div>
-      )}
+      </div>
+      <div className="row">
+        <div className="flex">
+          <RaisedButton
+            disabled={!username.toLowerCase().match(/^[a-z]+\.[a-z]+$/)}
+            label="Mix Me!"
+            primary
+            onClick={onSubmit}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="flex tutorial-link">
+          <span>New here? </span>
+          <Link to="/tutorial">Take the tutorial</Link>
+        </div>
+      </div>
     </div>
   )
 }
